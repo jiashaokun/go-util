@@ -3,10 +3,10 @@ package Util
 func InArray(s interface{}, d map[string]string) int {
 	for _, v := range d {
 		if s == v {
-			return true
+			return 1
 		}
 	}
-	return false
+	return 0
 }
 
 func ArrayKeys(s string, d map[string]string) int {
@@ -16,4 +16,16 @@ func ArrayKeys(s string, d map[string]string) int {
 		}
 	}
 	return false
+}
+
+func ArrayColumn(d map[int]map[string]string, column_key string, index_key string) map[int]map[string]string {
+	nd := make(map[int]map[string]string)
+	for k, v := range d {
+		for e, q := range v {
+			if e == index_key {
+				nd[k][index_key] = q
+			}
+		}
+	}
+	return nd
 }
