@@ -1,9 +1,19 @@
-package util
+package Util
 
-//查询数组中是否有该值=php in_array
-func In_table(v interface{}, c []int) bool {
-	return Intable(v, c)
+func InArray(s interface{}, d map[string]string) int {
+	for _, v := range d {
+		if s == v {
+			return true
+		}
+	}
+	return false
 }
 
-//返回数组中所有的键名array_keys
-//func (u *Util) array_keys(c) error {}
+func ArrayKeys(s string, d map[string]string) int {
+	for k, _ := range d {
+		if s == d {
+			return true
+		}
+	}
+	return false
+}
