@@ -5,6 +5,14 @@ type IntUtil struct {
 
 //检测一个 int 是否在 list 中
 func (i *IntUtil) InArray(num int, data []int) bool {
+	if len(data) == 0 {
+		return false
+	}
+	for _, v := range data {
+		if num == v {
+			return true
+		}
+	}
 	return true
 }
 
