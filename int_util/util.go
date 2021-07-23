@@ -1,5 +1,7 @@
 package int_util
 
+import "sort"
+
 type IntUtil struct {
 }
 
@@ -27,4 +29,27 @@ func (i *IntUtil) Unique(data []int) []int {
 		}
 	}
 	return list
+}
+
+//返回最大 和 最小 值
+type MaxMin struct {
+	Max int `json:"max"`
+	Min int `json:"min"`
+}
+
+//获取 最大 和 最小
+func (i *IntUtil) MaxMin(data []int) MaxMin {
+	resp := MaxMin{
+		Max: 0,
+		Min: 0,
+	}
+	if len(data) == 0 {
+		return resp
+	}
+	s := data
+	sort.Ints(s)
+	resp.Max = s[len(s)-1]
+	resp.Min = s[0]
+
+	return resp
 }
