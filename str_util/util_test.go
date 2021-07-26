@@ -30,3 +30,10 @@ func TestUniqueAny(t *testing.T) {
 		t.Fatalf("Str UniqueAny was err %s", res)
 	}
 }
+
+func TestIndex(t *testing.T) {
+	util := StrUtil{}
+	if key := util.Index("5", []interface{}{1, "5"}); key != 1 {
+		t.Fatalf("Str Index was err")
+	}
+}

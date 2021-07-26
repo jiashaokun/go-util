@@ -18,3 +18,17 @@ func TestBetweenDayStr(t *testing.T) {
 		t.Fatalf("TimeUtil BetweenDayStr was err")
 	}
 }
+
+func TestMonthOneDay(t *testing.T) {
+	util := TimeUtil{}
+
+	res := util.MonthOneDay(time.Now())
+	fmt.Println(res)
+}
+
+func TestMonthEndDay(t *testing.T) {
+	util := TimeUtil{}
+
+	res := util.MonthEndDay(time.Now())
+	fmt.Println(res)
+}
