@@ -1,6 +1,8 @@
 package int_util
 
-import "sort"
+import (
+	"sort"
+)
 
 type IntUtil struct {
 }
