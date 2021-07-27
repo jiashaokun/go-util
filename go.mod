@@ -1,3 +1,3 @@
-module github.com/jiashaokun/go-util
+module github.com/skey/go-util
 
 go 1.15
