@@ -1,8 +1,8 @@
 package go_util
 
 import (
-	"github.com/skey/go-util/int_util"
-	"github.com/skey/go-util/str_util"
+	"github.com/jiashaokun/go-util/int_util"
+	"github.com/jiashaokun/go-util/str_util"
 )
 
 type Util struct {
