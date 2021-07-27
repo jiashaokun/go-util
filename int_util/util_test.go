@@ -1,22 +1,49 @@
 package int_util
 
 import (
-	"github.com/jiashaokun/go-util"
+	"fmt"
 	"testing"
 )
 
 func TestInArray(t *testing.T) {
-	util := new(go_util.Util)
-	if ok := util.IntUtil.InArray(5, []int{1, 2, 3, 5}); !ok {
+	util := IntUtil{}
+	if ok := util.InArray(5, []int{1, 2, 3, 5}); !ok {
 		t.Fatalf("InArray was err")
 	}
 }
 
 func TestUnique(t *testing.T) {
-	util := new(go_util.Util)
+	util := IntUtil{}
 
-	res := util.IntUtil.Unique([]int{1, 2, 1})
+	res := util.Unique([]int{1, 2, 1})
 	if len(res) != 2 {
 		t.Fatalf("int Unique was err")
+	}
+}
+
+func TestMaxMin(t *testing.T) {
+	util := IntUtil{}
+	res := util.MaxMin([]int{2, 1, 2, 5, 4})
+	fmt.Println(res)
+	if res.Min != 1 || res.Max != 5 {
+		t.Fatalf("Int MaxMin was err")
+	}
+}
+
+func TestPlus(t *testing.T) {
+	util := IntUtil{}
+	res := util.Plus([]int{1, 2, 3})
+	fmt.Println(res)
+	if res != 6 {
+		t.Fatalf("Int Plus was err")
+	}
+}
+
+func Test(t *testing.T) {
+	util := IntUtil{}
+	res := util.RepeatNum(2, []int{1, 2, 2})
+	fmt.Println(res)
+	if res != 2 {
+		t.Fatalf("Int RepeatNum was err")
 	}
 }

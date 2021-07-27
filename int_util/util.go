@@ -35,8 +35,8 @@ func (i *IntUtil) Unique(data []int) []int {
 
 //返回最大 和 最小 值
 type MaxMin struct {
-	Max int `json:"max"`
 	Min int `json:"min"`
+	Max int `json:"max"`
 }
 
 //获取 最大 和 最小
@@ -54,4 +54,34 @@ func (i *IntUtil) MaxMin(data []int) MaxMin {
 	resp.Min = s[0]
 
 	return resp
+}
+
+//累加
+func (i *IntUtil) Plus(data []int) int {
+	if len(data) == 0 {
+		return 0
+	}
+
+	var plus int
+	for _, v := range data {
+		plus = plus + v
+	}
+
+	return plus
+}
+
+//找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
+func (i *IntUtil) RepeatNum(num int, data []int) int {
+	var repeatNum int
+	if len(data) == 0 {
+		return repeatNum
+	}
+
+	for _, v := range data {
+		if num == v {
+			repeatNum = repeatNum + 1
+		}
+	}
+
+	return repeatNum
 }
