@@ -37,3 +37,17 @@ func TestIndex(t *testing.T) {
 		t.Fatalf("Str Index was err")
 	}
 }
+
+func TestArrayKeys(t *testing.T) {
+	util := StrUtil{}
+
+	info := map[string]string{
+		"a": "a",
+		"b": "b",
+	}
+	res := util.ArrayKeys(info)
+	fmt.Println(res)
+	if len(res) != 2 {
+		t.Fatalf("Str ArrayKeys was err")
+	}
+}

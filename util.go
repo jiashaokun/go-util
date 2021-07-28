@@ -9,3 +9,7 @@ type Util struct {
 	IntUtil int_util.IntUtil
 	StrUtil str_util.StrUtil
 }
+
+type Util interface {
+	
+}

@@ -95,3 +95,17 @@ func (s *StrUtil) Index(find interface{}, data []interface{}) int {
 
 	return 0
 }
+
+//返回一个map的 keys in map[string]string{} return []string{}
+func (s *StrUtil) ArrayKeys(data map[string]string) []string {
+	var resp []string
+	if len(data) == 0 {
+		return resp
+	}
+
+	for k, _ := range data {
+		resp = append(resp, k)
+	}
+
+	return resp
+}
