@@ -40,8 +40,9 @@ func TestIntervalWeekDay(t *testing.T) {
 	ed, _ := time.Parse(localDayStr, end)
 
 	util := TimeUtil{}
-	res := util.IntervalWeekDay(st, ed, 1)
-	if len(res) != 4 {
+	res := util.IntervalWeekDay(st, ed, 0)
+	fmt.Println(res)
+	if len(res) != 3 {
 		t.Fatalf("TestIntervalWeekDay was err")
 	}
 }

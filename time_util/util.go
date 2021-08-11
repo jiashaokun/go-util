@@ -111,7 +111,7 @@ func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []
 		}
 		if d > 1 {
 			//获取周一
-			strDate = startTime.AddDate(0, 0, -d)
+			strDate = startTime.AddDate(0, 0, -(d - 1))
 
 		}
 	}
