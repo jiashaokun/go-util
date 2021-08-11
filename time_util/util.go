@@ -90,7 +90,7 @@ func (t *TimeUtil) MonthEndDay(today time.Time) time.Time {
 获取两个日期段内的所有的周数据
 dayType = 1
 in startTime : 2021-08-11 endTime : 2021-08-12
-rteutn [WeekDayInfo{StartDate: 2021-08-09, EndDate: 2021-08-15}]
+rteutn [WeekDayInfo{StartDate: 2021-08-09, EndDate: 2021-08-12}]
 
 dayType = 0
 in startTime : 2021-08-11 endTime : 2021-08-12
