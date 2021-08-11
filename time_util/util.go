@@ -85,3 +85,77 @@ func (t *TimeUtil) MonthEndDay(today time.Time) time.Time {
 
 	return resDay
 }
+
+/*
+获取两个日期段内的所有的周数据
+dayType = 1
+in startTime : 2021-08-11 endTime : 2021-08-12
+rteutn [WeekDayInfo{StartDate: 2021-08-09, EndDate: 2021-08-15}]
+
+dayType = 0
+in startTime : 2021-08-11 endTime : 2021-08-12
+rteutn [WeekDayInfo{StartDate: 2021-08-11, EndDate: 2021-08-15}]
+*/
+
+type WeekDayInfo struct {
+	DateList []time.Time
+}
+
+func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []WeekDayInfo {
+	//获取开始时间的周一 和 结束时间的 周末
+	strDate := startTime
+	if dayType == 1 {
+		d := int(startTime.Weekday())
+		if d == 0 {
+			d = 7
+		}
+		if d > 1 {
+			//获取周一
+			strDate = startTime.AddDate(0, 0, -d)
+
+		}
+	}
+
+	endDate := endTime
+	//获取 endTime 所在的周末
+	if dayType == 1 {
+		ed := int(endTime.Weekday())
+		if ed == 0 {
+			ed = 7
+		}
+		ced := 7 - ed
+		endDate = endTime.AddDate(0, 0, ced)
+	}
+
+	days := t.BetweenDayStr(strDate, endDate)
+
+	var resp []WeekDayInfo
+	//组装一个 map 已周一 为 key
+
+	weekDict := make(map[string][]time.Time)
+	for _, v := range days {
+		today, _ := time.Parse(localDayStr, v)
+		//获取周一的时间
+		td := int(today.Weekday())
+		one := today
+		if td == 0 {
+			td = 7
+		}
+		if td > 1 {
+			one = today.AddDate(0, 0, -(td - 1))
+		}
+
+		oneStr := one.Format(localDayStr)
+		weekDict[oneStr] = append(weekDict[oneStr], today)
+	}
+
+	for _, v := range weekDict {
+		info := WeekDayInfo{
+			DateList: v,
+		}
+
+		resp = append(resp, info)
+	}
+
+	return resp
+}
