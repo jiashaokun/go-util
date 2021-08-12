@@ -159,3 +159,30 @@ func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []
 
 	return resp
 }
+
+/*
+获取某个时间的周几
+dayType: 1:获取周一时间 2:获取周二时间......0:获取周日时间
+*/
+func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
+	if dayType < 0 || dayType > 6 {
+		return tm
+	}
+	if dayType == 0 {
+		dayType = 7
+	}
+
+	wd := int(tm.Weekday())
+	if wd == 0 {
+		wd = 7
+	}
+
+	d := tm
+	if wd > 1 {
+		d = tm.AddDate(0, 0, -(wd - 1))
+	}
+
+	d = d.AddDate(0, 0, dayType-1)
+
+	return d
+}

@@ -46,3 +46,11 @@ func TestIntervalWeekDay(t *testing.T) {
 		t.Fatalf("TestIntervalWeekDay was err")
 	}
 }
+
+func TestWithDay(t *testing.T) {
+	str := "2021-08-03"
+	st, _ := time.Parse(localDayStr, str)
+	util := TimeUtil{}
+	res := util.WithDay(st, 0)
+	fmt.Println(res)
+}
