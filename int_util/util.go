@@ -56,7 +56,7 @@ func (i *IntUtil) MaxMin(data []int) MaxMin {
 	return resp
 }
 
-//累加
+//++
 func (i *IntUtil) Plus(data []int) int {
 	if len(data) == 0 {
 		return 0

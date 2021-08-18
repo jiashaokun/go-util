@@ -54,3 +54,48 @@ func TestWithDay(t *testing.T) {
 	res := util.WithDay(st, 0)
 	fmt.Println(res)
 }
+
+func TestTimeIntersection(t *testing.T) {
+	util := TimeUtil{}
+	os := "2021-01-02 12:00:00"
+	oe := "2021-01-02 14:00:00"
+
+	as := "2021-01-02 12:00:00"
+	ae := "2021-01-02 14:00:00"
+	p1 := TimeIntersectionInfo{
+		FirstTimeStart:  timeFt(os),
+		FirstTimeEnd:    timeFt(oe),
+		SecondTimeStart: timeFt(as),
+		SecondTimeEnd:   timeFt(ae),
+	}
+	res1 := util.TimeIntersection(p1)
+	fmt.Println(res1)
+
+	bs := "2021-01-02 11:00:00"
+	be := "2021-01-02 15:00:00"
+	p2 := TimeIntersectionInfo{
+		FirstTimeStart:  timeFt(os),
+		FirstTimeEnd:    timeFt(oe),
+		SecondTimeStart: timeFt(bs),
+		SecondTimeEnd:   timeFt(be),
+	}
+	res2 := util.TimeIntersection(p2)
+	fmt.Println(res2)
+
+	cs := "2021-01-02 12:10:00"
+	ce := "2021-01-02 13:00:00"
+	p3 := TimeIntersectionInfo{
+		FirstTimeStart:  timeFt(os),
+		FirstTimeEnd:    timeFt(oe),
+		SecondTimeStart: timeFt(cs),
+		SecondTimeEnd:   timeFt(ce),
+	}
+	res3 := util.TimeIntersection(p3)
+	fmt.Println(res3)
+}
+
+func timeFt(t string) time.Time {
+	t2, _ := time.Parse(localTimeStr, t)
+
+	return t2
+}

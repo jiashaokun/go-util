@@ -188,3 +188,35 @@ func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
 
 	return d
 }
+
+//返回两端时间是否有交集
+type TimeIntersectionInfo struct {
+	FirstTimeStart  time.Time
+	FirstTimeEnd    time.Time
+	SecondTimeStart time.Time
+	SecondTimeEnd   time.Time
+}
+
+func (t *TimeUtil) TimeIntersection(info TimeIntersectionInfo) bool {
+	//1. A B A B
+	if info.SecondTimeStart.After(info.FirstTimeStart) && info.SecondTimeStart.Before(info.SecondTimeEnd) {
+		return true
+	}
+	//2. A B B A
+	if info.FirstTimeStart.Before(info.SecondTimeStart) && info.FirstTimeEnd.After(info.SecondTimeEnd) {
+		return true
+	}
+	//3. B A B A
+	if info.FirstTimeStart.After(info.SecondTimeStart) && info.FirstTimeStart.Before(info.SecondTimeEnd) {
+		return true
+	}
+	//4. B A A B
+	if info.SecondTimeStart.Before(info.FirstTimeStart) && info.SecondTimeEnd.After(info.FirstTimeEnd) {
+		return true
+	}
+	//相等
+	if info.FirstTimeStart == info.SecondTimeStart || info.FirstTimeStart == info.SecondTimeEnd || info.FirstTimeEnd == info.SecondTimeStart || info.FirstTimeEnd == info.SecondTimeEnd {
+		return true
+	}
+	return false
+}
