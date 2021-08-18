@@ -99,3 +99,22 @@ func timeFt(t string) time.Time {
 
 	return t2
 }
+
+func TestIntersectionTime(t *testing.T) {
+	util := TimeUtil{}
+
+	os := "2021-01-02 14:00:00"
+	oe := "2021-01-02 14:01:00"
+
+	as := "2021-01-02 13:00:00"
+	ae := "2021-01-02 15:00:00"
+	p1 := TimeIntersectionInfo{
+		FirstTimeStart:  timeFt(os),
+		FirstTimeEnd:    timeFt(oe),
+		SecondTimeStart: timeFt(as),
+		SecondTimeEnd:   timeFt(ae),
+	}
+
+	res := util.IntersectionTime(p1)
+	fmt.Println(res)
+}

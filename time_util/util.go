@@ -220,3 +220,69 @@ func (t *TimeUtil) TimeIntersection(info TimeIntersectionInfo) bool {
 	}
 	return false
 }
+
+//两个时间段的交集时间
+type IntersectionTimeInfo struct {
+	TimeStart time.Time
+	TimeEnd   time.Time
+}
+
+func (t *TimeUtil) IntersectionTime(info TimeIntersectionInfo) IntersectionTimeInfo {
+	resp := IntersectionTimeInfo{}
+
+	if info.SecondTimeEnd == info.FirstTimeEnd {
+		resp.TimeEnd = info.SecondTimeEnd
+	}
+
+	if info.SecondTimeStart == info.FirstTimeStart {
+		resp.TimeStart = info.FirstTimeStart
+	}
+
+	if info.FirstTimeEnd.After(info.SecondTimeStart) && info.FirstTimeEnd.Before(info.SecondTimeEnd) {
+		resp.TimeEnd = info.FirstTimeEnd
+	}
+
+	if info.FirstTimeStart.After(info.SecondTimeStart) && info.FirstTimeStart.Before(info.SecondTimeEnd) {
+		resp.TimeStart = info.FirstTimeStart
+	}
+
+	if info.SecondTimeEnd.After(info.FirstTimeStart) && info.SecondTimeEnd.Before(info.FirstTimeEnd) || info.SecondTimeEnd == info.FirstTimeEnd {
+		resp.TimeEnd = info.SecondTimeEnd
+
+		if info.FirstTimeStart.Before(info.SecondTimeStart) {
+			resp.TimeStart = info.SecondTimeStart
+		}
+
+		if info.FirstTimeStart.After(info.SecondTimeStart) {
+			resp.TimeStart = info.FirstTimeStart
+		}
+
+		return resp
+	}
+
+	if info.SecondTimeStart.After(info.FirstTimeStart) && info.SecondTimeStart.Before(info.FirstTimeEnd) || info.SecondTimeStart == info.FirstTimeStart {
+		resp.TimeStart = info.SecondTimeStart
+
+		if info.SecondTimeEnd.After(info.FirstTimeEnd) {
+			resp.TimeEnd = info.FirstTimeEnd
+		}
+
+		if info.SecondTimeEnd.Before(info.FirstTimeEnd) {
+			resp.TimeEnd = info.SecondTimeEnd
+		}
+
+		return resp
+	}
+
+	if info.SecondTimeEnd == info.FirstTimeStart {
+		resp.TimeStart = info.SecondTimeEnd
+		resp.TimeEnd = info.SecondTimeEnd
+	}
+
+	if info.FirstTimeEnd == info.SecondTimeStart {
+		resp.TimeStart = info.FirstTimeEnd
+		resp.TimeEnd = info.FirstTimeEnd
+	}
+
+	return resp
+}
