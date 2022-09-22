@@ -118,3 +118,11 @@ func TestIntersectionTime(t *testing.T) {
 	res := util.IntersectionTime(p1)
 	fmt.Println(res)
 }
+
+func TestWithDayListDay(t *testing.T) {
+	util := TimeUtil{}
+	startDate, _ := time.ParseInLocation(localDayStr, "2022-09-01", time.Local)
+	endDate, _ := time.ParseInLocation(localTimeStr, "2022-09-30 19:01:01", time.Local)
+	days := util.WithDayListDay(startDate, endDate, 0)
+	fmt.Println(days)
+}

@@ -9,7 +9,7 @@ type TimeUtil struct{}
 const localDayStr = "2006-01-02"
 const localTimeStr = "2006-01-02 15:04:05"
 
-//返回两段时间的日期 in 2021-01-01 11:00:00  2021-01-02 11:00:00  return []string{"2021-01-01", "2021-01-02"}
+// BetweenDayStr 返回两段时间的日期 in 2021-01-01 11:00:00  2021-01-02 11:00:00  return []string{"2021-01-01", "2021-01-02"}
 func (t *TimeUtil) BetweenDayStr(str, end time.Time) []string {
 	var strS, endS string
 	if str.IsZero() {
@@ -45,7 +45,7 @@ func (t *TimeUtil) BetweenDayStr(str, end time.Time) []string {
 	return days
 }
 
-//返回某个月的第一天的零点 in 2021-01-05 return 2021-01-01
+// MonthOneDay 返回某个月的第一天的零点 in 2021-01-05 return 2021-01-01
 func (t *TimeUtil) MonthOneDay(today time.Time) time.Time {
 	var todayStr string
 	if today.IsZero() {
@@ -66,7 +66,7 @@ func (t *TimeUtil) MonthOneDay(today time.Time) time.Time {
 
 }
 
-//返回 一个月的最后一天的 零点
+// MonthEndDay 返回 一个月的最后一天的 零点
 func (t *TimeUtil) MonthEndDay(today time.Time) time.Time {
 	var todayStr string
 	if today.IsZero() {
@@ -103,6 +103,7 @@ type WeekDayInfo struct {
 	DateList []time.Time
 }
 
+// IntervalWeekDay 已周为单位,把相同周的日期放在同一个组，分割时间
 func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []WeekDayInfo {
 	//获取开始时间的周一 和 结束时间的 周末
 	strDate := startTime
@@ -162,10 +163,7 @@ func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []
 	return resp
 }
 
-/*
-获取某个时间的周几
-dayType: 1:获取周一时间 2:获取周二时间......0:获取周日时间
-*/
+// WithDay 获取某个时间的周几。dayType: 1:获取周一时间 2:获取周二时间......0:获取周日时间
 func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
 	if dayType < 0 || dayType > 6 {
 		return tm
@@ -189,7 +187,21 @@ func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
 	return d
 }
 
-//返回两端时间是否有交集
+// WithDayListDay 获取一段时间内的周几：0：星期日。输入：startDate = 2022-09-01, endDate = 2022-09-20; day = 0(星期日) return [2022-01-07, 2022-01-14]
+func (t *TimeUtil) WithDayListDay(startDate, endDate time.Time, day int) []time.Time {
+	var resp []time.Time
+	dayList := t.BetweenDayStr(startDate, endDate)
+	for _, tmStr := range dayList {
+		tm, _ := time.ParseInLocation(localDayStr, tmStr, time.Local)
+		if int(tm.Weekday()) == day {
+			resp = append(resp, tm)
+		}
+	}
+
+	return resp
+}
+
+// TimeIntersectionInfo 返回两端时间是否有交集
 type TimeIntersectionInfo struct {
 	FirstTimeStart  time.Time
 	FirstTimeEnd    time.Time
@@ -221,7 +233,7 @@ func (t *TimeUtil) TimeIntersection(info TimeIntersectionInfo) bool {
 	return false
 }
 
-//两个时间段的交集时间
+// IntersectionTimeInfo 两个时间段的交集时间
 type IntersectionTimeInfo struct {
 	TimeStart time.Time
 	TimeEnd   time.Time
