@@ -47,3 +47,11 @@ func Test(t *testing.T) {
 		t.Fatalf("Int RepeatNum was err")
 	}
 }
+
+func TestReduce(t *testing.T) {
+	util := IntUtil{}
+	res := util.Reduce([]int{2, 3, 1, 4, 5})
+	if res != -5 {
+		fmt.Println("Reduce was err")
+	}
+}

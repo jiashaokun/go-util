@@ -70,6 +70,25 @@ func (i *IntUtil) Plus(data []int) int {
 	return plus
 }
 
+// Reduce -- 举例：3,2,4,1,5 : 5-4-3-2-1
+func (i *IntUtil) Reduce(data []int) int {
+	if len(data) == 0 {
+		return 0
+	}
+	if len(data) == 1 {
+		return data[0]
+	}
+	sort.Ints(data)
+	var max int
+	for k, v := range data {
+		if k == len(data)-1 {
+			break
+		}
+		max = max + v
+	}
+	return data[len(data)-1] - max
+}
+
 //找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
 func (i *IntUtil) RepeatNum(num int, data []int) int {
 	var repeatNum int
