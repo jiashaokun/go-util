@@ -126,3 +126,10 @@ func TestWithDayListDay(t *testing.T) {
 	days := util.WithDayListDay(startDate, endDate, 0)
 	fmt.Println(days)
 }
+
+func TestTimeUtil_DateWeekThis(t *testing.T) {
+	today := time.Now()
+	util := TimeUtil{}
+	res := util.DateWeekThis(&today)
+	fmt.Println(res)
+}
