@@ -13,6 +13,16 @@ type TimeUtil struct {
 const localDayStr = "2006-01-02"
 const localTimeStr = "2006-01-02 15:04:05"
 
+var dateWeekMap = map[time.Weekday]string{
+	time.Monday:    "周一",
+	time.Tuesday:   "周二",
+	time.Wednesday: "周三",
+	time.Thursday:  "周四",
+	time.Friday:    "周五",
+	time.Saturday:  "周六",
+	time.Sunday:    "周日",
+}
+
 // BetweenDayStr 返回两段时间的日期 in 2021-01-01 11:00:00  2021-01-02 11:00:00  return []string{"2021-01-01", "2021-01-02"}
 func (t *TimeUtil) BetweenDayStr(str, end time.Time) []string {
 	var strS, endS string
@@ -300,5 +310,30 @@ func (t *TimeUtil) IntersectionTime(info TimeIntersectionInfo) IntersectionTimeI
 		resp.TimeEnd = info.FirstTimeEnd
 	}
 
+	return resp
+}
+
+type DateWeeks struct {
+	Date     time.Time //传入的日期
+	ThisWeek bool      //是否是本周 true 是 false 不是
+	Week     string    //周几
+}
+
+// DateWeekThis 获取某一天是不是本周，是本周的周几
+func (t *TimeUtil) DateWeekThis(date *time.Time) DateWeeks {
+	var resp DateWeeks
+	if date.IsZero() {
+		return resp
+	}
+	resp.Date = *date
+
+	_, d := date.ISOWeek()
+	_, n := time.Now().ISOWeek()
+
+	if d == n {
+		resp.ThisWeek = true
+	}
+
+	resp.Week = dateWeekMap[date.Weekday()]
 	return resp
 }

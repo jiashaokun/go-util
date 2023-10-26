@@ -1,4 +1,4 @@
 module github.com/jiashaokun/go-util
 
-go 1.18
+go 1.20
 
