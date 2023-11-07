@@ -178,7 +178,7 @@ func (t *TimeUtil) IntervalWeekDay(startTime, endTime time.Time, dayType int) []
 }
 
 // WithDay 获取某个时间的周几。dayType: 1:获取周一时间 2:获取周二时间......0:获取周日时间
-func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
+func (t *TimeUtil) WithDay(tm time.Time, dayType time.Weekday) time.Time {
 	if dayType < 0 || dayType > 6 {
 		return tm
 	}
@@ -196,18 +196,18 @@ func (t *TimeUtil) WithDay(tm time.Time, dayType int) time.Time {
 		d = tm.AddDate(0, 0, -(wd - 1))
 	}
 
-	d = d.AddDate(0, 0, dayType-1)
+	d = d.AddDate(0, 0, int(dayType)-1)
 
 	return d
 }
 
 // WithDayListDay 获取一段时间内的周几：0：星期日。输入：startDate = 2022-09-01, endDate = 2022-09-20; day = 0(星期日) return [2022-01-07, 2022-01-14]
-func (t *TimeUtil) WithDayListDay(startDate, endDate time.Time, day int) []time.Time {
+func (t *TimeUtil) WithDayListDay(startDate, endDate time.Time, day time.Weekday) []time.Time {
 	var resp []time.Time
 	dayList := t.BetweenDayStr(startDate, endDate)
 	for _, tmStr := range dayList {
 		tm, _ := time.ParseInLocation(localDayStr, tmStr, time.Local)
-		if int(tm.Weekday()) == day {
+		if tm.Weekday() == day {
 			resp = append(resp, tm)
 		}
 	}

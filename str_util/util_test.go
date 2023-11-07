@@ -33,8 +33,9 @@ func TestUniqueAny(t *testing.T) {
 
 func TestIndex(t *testing.T) {
 	util := StrUtil{}
-	if key := util.Index("5", []interface{}{1, "5"}); key != 1 {
-		t.Fatalf("Str Index was err")
+	key := util.Index("5", []interface{}{1, "5", "5"})
+	if len(key) != 2 {
+		t.Fatalf("Str TestIndex was err")
 	}
 }
 
@@ -49,5 +50,23 @@ func TestArrayKeys(t *testing.T) {
 	fmt.Println(res)
 	if len(res) != 2 {
 		t.Fatalf("Str ArrayKeys was err")
+	}
+}
+
+func TestArrayFilter(t *testing.T) {
+	util := StrUtil{}
+	in := []string{"1", "2", "c", "c", "", " "}
+	res := util.ArrayFilter(in, "c")
+	if len(res) != 4 {
+		t.Fatalf("Str TestArrayFilter was err")
+	}
+}
+
+func TestArrayFilterAny(t *testing.T) {
+	util := StrUtil{}
+	in := []string{"1", "2", "c", "c", "", " "}
+	res := util.ArrayFilterAny(in, []string{"c", "", " "})
+	if len(res) != 2 {
+		t.Fatalf("Str TestArrayFilterAny was err")
 	}
 }
