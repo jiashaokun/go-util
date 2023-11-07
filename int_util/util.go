@@ -7,7 +7,7 @@ import (
 type IntUtil struct {
 }
 
-//检测一个 int 是否在 list 中
+// 检测一个 int 是否在 list 中
 func (i *IntUtil) InArray(num int, data []int) bool {
 	if len(data) == 0 {
 		return false
@@ -20,7 +20,7 @@ func (i *IntUtil) InArray(num int, data []int) bool {
 	return true
 }
 
-//排重
+// 排重
 func (i *IntUtil) Unique(data []int) []int {
 	keys := make(map[int]bool)
 	var list []int
@@ -33,13 +33,13 @@ func (i *IntUtil) Unique(data []int) []int {
 	return list
 }
 
-//返回最大 和 最小 值
+// 返回最大 和 最小 值
 type MaxMin struct {
 	Min int `json:"min"`
 	Max int `json:"max"`
 }
 
-//获取 最大 和 最小
+// 获取 最大 和 最小
 func (i *IntUtil) MaxMin(data []int) MaxMin {
 	resp := MaxMin{
 		Max: 0,
@@ -56,7 +56,7 @@ func (i *IntUtil) MaxMin(data []int) MaxMin {
 	return resp
 }
 
-//++
+// Plus 返回 []int{} 中元素的 ++ 值
 func (i *IntUtil) Plus(data []int) int {
 	if len(data) == 0 {
 		return 0
@@ -89,7 +89,7 @@ func (i *IntUtil) Reduce(data []int) int {
 	return data[len(data)-1] - max
 }
 
-//找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
+// 找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
 func (i *IntUtil) RepeatNum(num int, data []int) int {
 	var repeatNum int
 	if len(data) == 0 {

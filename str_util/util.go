@@ -11,9 +11,6 @@ import (
 type StrUtil struct{}
 
 func (s *StrUtil) InArray(str string, data []string) bool {
-	if str == "" || len(data) == 0 {
-		return false
-	}
 
 	for _, v := range data {
 		if str == v {
@@ -40,7 +37,7 @@ func (s *StrUtil) Unique(data []string) []string {
 	return res
 }
 
-//interface 排重 in []interface{1, "1", 2, "2", "a", "a", 1.12, "1.12"} return []interface{"1", "2", "a"}
+// interface 排重 in []interface{1, "1", 2, "2", "a", "a", 1.12, "1.12"} return []interface{"1", "2", "a"}
 func (s *StrUtil) UniqueAny(data []interface{}) []string {
 	var resp []string
 	if len(data) == 0 {
@@ -56,7 +53,7 @@ func (s *StrUtil) UniqueAny(data []interface{}) []string {
 	return s.Unique(middle)
 }
 
-//info 为空 则 过滤 空值  input []string{"", ""} return []string{}
+// ArrayFilter info 为空 则 过滤 空值  input []string{"", ""} return []string{}
 func (s *StrUtil) ArrayFilter(data []string, info string) []string {
 	var resp []string
 	for _, v := range data {
@@ -69,10 +66,23 @@ func (s *StrUtil) ArrayFilter(data []string, info string) []string {
 	return resp
 }
 
-//返回某个数据的 key 值
-func (s *StrUtil) Index(find interface{}, data []interface{}) int {
+// ArrayFilterAny 过滤多个值
+func (s *StrUtil) ArrayFilterAny(data []string, info []string) []string {
+	var resp []string
+	for _, v := range data {
+		if !s.InArray(v, info) {
+			resp = append(resp, v)
+		}
+	}
+
+	return resp
+}
+
+// Index 返回某个数据的 key 值
+func (s *StrUtil) Index(find interface{}, data []interface{}) []int {
+	var res []int
 	if len(data) == 0 {
-		return -1
+		return res
 	}
 
 	var fdBuf bytes.Buffer
@@ -88,15 +98,14 @@ func (s *StrUtil) Index(find interface{}, data []interface{}) int {
 		d := buf.Bytes()
 		es := fmt.Sprintf("%x", md5.Sum(d))
 		if fes == es {
-			fmt.Println(k)
-			return k
+			res = append(res, k)
 		}
 	}
 
-	return 0
+	return res
 }
 
-//返回一个map的 keys in map[string]string{} return []string{}
+// 返回一个map的 keys in map[string]string{} return []string{}
 func (s *StrUtil) ArrayKeys(data map[string]string) []string {
 	var resp []string
 	if len(data) == 0 {
