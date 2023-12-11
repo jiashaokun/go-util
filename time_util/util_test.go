@@ -133,3 +133,9 @@ func TestTimeUtil_DateWeekThis(t *testing.T) {
 	res := util.DateWeekThis(&today)
 	fmt.Println(res)
 }
+
+func TestMothDays(t *testing.T) {
+	util := TimeUtil{}
+	res := util.MothDays([]int{0, 1, 5, 30, 31, 32})
+	fmt.Println(res)
+}
