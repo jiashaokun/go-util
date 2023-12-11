@@ -337,3 +337,21 @@ func (t *TimeUtil) DateWeekThis(date *time.Time) DateWeeks {
 	resp.Week = dateWeekMap[date.Weekday()]
 	return resp
 }
+
+// MothDays 返回某个月固定的某几天 input []int{1,2} return ["2021-01-01", "2021-01-02"]
+func (t *TimeUtil) MothDays(days []int) []time.Time {
+	var resp []time.Time
+	zeroDay := t.MonthOneDay(time.Now())
+	for _, v := range days {
+		if v <= 0 {
+			continue
+		}
+		day := zeroDay.AddDate(0, 0, v-1)
+		//如果超过本月则不加
+		if day.After(t.MonthEndDay(time.Now())) {
+			continue
+		}
+		resp = append(resp, day)
+	}
+	return resp
+}
