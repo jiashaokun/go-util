@@ -25,6 +25,7 @@
    7. TimeIntersectionInfo 返回两端时间是否有交集
    8. IntersectionTime 两个时间段的交集时间
    9. DateWeekThis 获取某一天是不是本周，是本周的周几
+   10. MothDays 获取某个月的某些天 input []int{0, 1, 32} return []time.Time{2022-01-01 .... 2022-01-31}
 
 ### demo
 ```go
