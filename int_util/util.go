@@ -89,7 +89,7 @@ func (i *IntUtil) Reduce(data []int) int {
 	return data[len(data)-1] - max
 }
 
-// 找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
+// RepeatNum 找到某个数字在数组中重复出现的次数 in 2 []{1,2,2} return 2
 func (i *IntUtil) RepeatNum(num int, data []int) int {
 	var repeatNum int
 	if len(data) == 0 {
