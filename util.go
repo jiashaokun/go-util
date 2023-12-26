@@ -6,6 +6,7 @@ import (
 	"github.com/jiashaokun/go-util/time_util"
 )
 
+// Util 增加时间工具类型
 type Util struct {
 	IntUtil  int_util.IntUtil
 	StrUtil  str_util.StrUtil
