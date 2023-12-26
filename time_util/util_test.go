@@ -139,3 +139,15 @@ func TestMothDays(t *testing.T) {
 	res := util.MothDays([]int{0, 1, 5, 30, 31, 32})
 	fmt.Println(res)
 }
+
+func TestDayTwiceTime(t *testing.T) {
+	util := TimeUtil{}
+	ys := time.Now().AddDate(0, 0, -1).Format(time.DateOnly)
+	fmt.Println("=========", ys)
+	d := util.TimeStringToTime(ys)
+	if d == nil {
+		t.Fatal("TimeStringToUnix error")
+	}
+	res := util.DayTwiceTime(*d)
+	fmt.Println(res)
+}

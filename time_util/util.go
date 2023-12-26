@@ -355,3 +355,20 @@ func (t *TimeUtil) MothDays(days []int) []time.Time {
 	}
 	return resp
 }
+
+type DayTwice struct {
+	ZeroTime time.Time
+	EndTime  time.Time
+}
+
+// DayTwiceTime 返回某个时间的 0 点 和 24 点
+func (t *TimeUtil) DayTwiceTime(in time.Time) DayTwice {
+	var resp DayTwice
+	zero := in.Hour()
+	resp.ZeroTime = in.Truncate(time.Duration(zero))
+	ux := time.Unix(resp.ZeroTime.Unix()+86399, 64)
+	us := ux.Format(time.DateTime)
+	resp.EndTime, _ = time.ParseInLocation(time.DateTime, us, time.Local)
+
+	return resp
+}
